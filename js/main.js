@@ -162,6 +162,17 @@
     if (box) box.checked = true;
   }
 
+  // Pricing buttons: start the message for the visitor, unless they've already written one
+  function prefillPackage(name) {
+    const message = $('#contact-form textarea[name="message"]');
+    if (!message) return;
+    const current = message.value.trim();
+    if (current && !message.dataset.prefilled) return;
+    message.value = `Hi FUMI! I'm interested in the ${name}. `;
+    message.dataset.prefilled = '1';
+    message.addEventListener('input', () => delete message.dataset.prefilled, { once: true });
+  }
+
   function scrollToTarget(target) {
     const behavior = reducedMotion() ? 'auto' : 'smooth';
     if (target.id === 'home') {
@@ -187,6 +198,7 @@
 
       e.preventDefault();
       if (link.dataset.service) prefillService(link.dataset.service);
+      if (link.dataset.package) prefillPackage(link.dataset.package);
 
       closeMenu();
       $$('dialog[open]').forEach((dialog) => dialog.close());
