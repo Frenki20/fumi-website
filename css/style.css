@@ -36,10 +36,10 @@
   --text: #1a1414;            /* warm black */
   --ink-rgb: 26 20 20;
   --muted: #6e6560;           /* warm grey */
-  --accent: #e5383b;          /* bright red: headlines, dots, decoration */
-  --accent-rgb: 229 56 59;
-  --accent-strong: #d72f34;   /* buttons & red surfaces (AA contrast with --on-accent) */
-  --accent-ink: #c42026;      /* small red text on cream (AA contrast) */
+  --accent: #641212;          /* logo maroon: headlines, dots, decoration */
+  --accent-rgb: 100 18 18;
+  --accent-strong: #641212;   /* buttons & red surfaces (AA contrast with --on-accent) */
+  --accent-ink: #641212;      /* small red text on cream (AA contrast) */
   --on-accent: #fff8f0;       /* text and icons on red */
   --line: rgb(26 20 20 / .1);
   --line-strong: rgb(26 20 20 / .2);
@@ -443,6 +443,34 @@ h2 em, h3 em, .hero__title em, .footer__big em {
   opacity: 0;
 }
 .logo:hover .logo__dot::after { animation: ripple 1.4s var(--ease-out) infinite; }
+.logo__img { display: block; height: 1.9rem; width: auto; transition: transform .4s var(--ease-out); }
+.logo:hover .logo__img { transform: scale(1.04); }
+
+/* Brand logo image in the loader, hero and footer */
+.loader__logo {
+  display: block;
+  height: clamp(3rem, 9vw, 6.5rem);
+  width: auto;
+  animation: loader-letter .9s var(--ease-out) .1s both;
+  filter: brightness(0) invert(1); /* cream-white on the red curtain */
+}
+.hero__word:has(.hero__logo),
+.hero__word:has(.hero__logo) .char-wrap { display: block; }
+.hero__logo {
+  display: block;
+  width: min(100%, 150vh);
+  height: auto;
+}
+.js .hero__logo { transform: translateY(108%); }
+.js.is-loaded .hero__logo { transform: none; transition: transform 1.3s var(--ease-out) .3s; }
+.footer__wordmark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: .1;
+  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 92%);
+  mask-image: linear-gradient(180deg, #000 30%, transparent 92%);
+}
 
 .nav__list {
   display: flex;
