@@ -32,6 +32,67 @@
     };
   };
 
+  /* Interface text in the page's language (<html lang="en"> or <html lang="sq">) */
+  const LANG = root.lang.toLowerCase().startsWith('sq') ? 'sq' : 'en';
+  const STRINGS = {
+    en: {
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
+      showing: (n) => `Showing ${n} project${n === 1 ? '' : 's'}`,
+      packageMessage: (name) => `Hi FUMI! I'm interested in the ${name}. `,
+      required: {
+        name: 'Please tell us your name.',
+        email: 'We need your email address to reply.',
+        message: 'Please tell us a little about your project.',
+      },
+      requiredField: 'This field is required.',
+      invalidEmail: 'Please enter a valid email address.',
+      minLength: (n) => `Please write at least ${n} characters.`,
+      checkFields: 'Please check the highlighted fields.',
+      sending: 'Sending…',
+      send: 'Send message',
+      sent: 'Thank you! Your message has been sent.',
+      failed: 'Sorry, your message couldn’t be sent right now. Please try again or ',
+      emailDirectly: (email) => `email us directly at ${email}`,
+      mailSubject: 'Project enquiry',
+      fields: { name: 'Name', email: 'Email', company: 'Company', services: 'Services', budget: 'Budget' },
+      notSpecified: 'Not specified',
+      copied: 'Email address copied',
+      thousands: ',',
+      currencyAll: 'ALL',
+    },
+    sq: {
+      openMenu: 'Hap menunë',
+      closeMenu: 'Mbyll menunë',
+      showing: (n) => `Po shfaqen ${n} ${n === 1 ? 'projekt' : 'projekte'}`,
+      packageMessage: (name) => `Përshëndetje FUMI! Më intereson ${name}. `,
+      required: {
+        name: 'Ju lutemi na tregoni emrin tuaj.',
+        email: 'Na duhet adresa juaj e email-it për t’ju kthyer përgjigje.',
+        message: 'Ju lutemi na tregoni pak për projektin tuaj.',
+      },
+      requiredField: 'Kjo fushë është e detyrueshme.',
+      invalidEmail: 'Ju lutemi shkruani një adresë email-i të vlefshme.',
+      minLength: (n) => `Ju lutemi shkruani të paktën ${n} karaktere.`,
+      checkFields: 'Ju lutemi kontrolloni fushat e shënuara.',
+      sending: 'Po dërgohet…',
+      send: 'Dërgo mesazhin',
+      sent: 'Faleminderit! Mesazhi juaj u dërgua.',
+      failed: 'Na vjen keq, mesazhi nuk u dërgua dot për momentin. Provoni përsëri ose ',
+      emailDirectly: (email) => `na shkruani direkt në ${email}`,
+      mailSubject: 'Kërkesë për projekt',
+      fields: { name: 'Emri', email: 'Email', company: 'Kompania', services: 'Shërbimet', budget: 'Buxheti' },
+      notSpecified: 'Pa specifikuar',
+      copied: 'Adresa e email-it u kopjua',
+      thousands: '\u00a0', // Albanian groups digits with a (non-breaking) space: 14 500
+      currencyAll: 'lekë',
+    },
+  };
+  const t = STRINGS[LANG];
+
+  /* Approximate euro → lek rate for the "≈ … lekë" price hints. Update it occasionally. */
+  const EUR_TO_ALL = 97;
+
   // Shared hooks filled in by the modules below
   let closeMenu = () => {};
 
@@ -128,7 +189,7 @@
       root.classList.toggle('menu-open', open);
       root.classList.toggle('is-locked', open);
       burger.setAttribute('aria-expanded', String(open));
-      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      burger.setAttribute('aria-label', open ? t.closeMenu : t.openMenu);
       panel.setAttribute('aria-hidden', String(!open));
       panel.inert = !open;
       background.forEach((el) => { el.inert = open; });
@@ -168,7 +229,7 @@
     if (!message) return;
     const current = message.value.trim();
     if (current && !message.dataset.prefilled) return;
-    message.value = `Hi FUMI! I'm interested in the ${name}. `;
+    message.value = t.packageMessage(name);
     message.dataset.prefilled = '1';
     message.addEventListener('input', () => delete message.dataset.prefilled, { once: true });
   }
@@ -360,7 +421,7 @@
           projects.forEach((p) => { p.hidden = !matches(p, filter); });
           layout();
           const visible = projects.filter((p) => !p.hidden).length;
-          if (status) status.textContent = `Showing ${visible} project${visible === 1 ? '' : 's'}`;
+          if (status) status.textContent = t.showing(visible);
         };
 
         clearTimeout(timer);
@@ -418,37 +479,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     12. Process timeline progress
-     ------------------------------------------------------------------------ */
-  function initProcess() {
-    const timeline = $('.process__timeline');
-    if (!timeline) return;
-
-    const steps = $$('.step', timeline);
-    const vertical = window.matchMedia('(max-width: 960px)');
-
-    const update = () => {
-      const rect = timeline.getBoundingClientRect();
-      const viewport = window.innerHeight;
-      if (rect.top > viewport * 1.5 || rect.bottom < -viewport * 0.5) return; // off-screen
-
-      const progress = clamp((viewport * 0.65 - rect.top) / rect.height, 0, 1);
-      timeline.style.setProperty('--progress', progress.toFixed(4));
-
-      steps.forEach((step) => {
-        const position = vertical.matches ? step.offsetTop / rect.height : step.offsetLeft / rect.width;
-        step.classList.toggle('is-active', progress > 0 && progress >= position);
-      });
-    };
-
-    const onScroll = rafThrottle(update);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    update();
-  }
-
-  /* ------------------------------------------------------------------------
-     13. Animated counters
+     12. Animated counters
      ------------------------------------------------------------------------ */
   function initCounters() {
     const counters = $$('[data-count]');
@@ -484,6 +515,19 @@
   }
 
   /* ------------------------------------------------------------------------
+     13. Approximate prices in lekë — fills every [data-eur] placeholder
+     ------------------------------------------------------------------------ */
+  function initLocalPrices() {
+    const targets = $$('[data-eur]');
+    if (!targets.length) return;
+    const format = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, t.thousands);
+    targets.forEach((el) => {
+      const lek = Math.round((Number(el.dataset.eur) * EUR_TO_ALL) / 500) * 500; // rounded to 500 L
+      if (lek > 0) el.textContent = `≈ ${format(lek)} ${t.currencyAll}`;
+    });
+  }
+
+  /* ------------------------------------------------------------------------
      14. Contact form — validation + AJAX submission (FormSubmit)
      ------------------------------------------------------------------------ */
   function initContactForm() {
@@ -496,11 +540,6 @@
     const submit = $('button[type="submit"]', form);
     const required = $$('[required]', form);
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const REQUIRED_MESSAGES = {
-      name: 'Please tell us your name.',
-      email: 'We need your email address to reply.',
-      message: 'Please tell us a little about your project.',
-    };
 
     form.noValidate = true; // we show our own, friendlier messages
 
@@ -516,9 +555,9 @@
     const validate = (field) => {
       const value = field.value.trim();
       let message = '';
-      if (field.required && !value) message = REQUIRED_MESSAGES[field.name] || 'This field is required.';
-      else if (field.type === 'email' && value && !EMAIL_RE.test(value)) message = 'Please enter a valid email address.';
-      else if (field.minLength > 0 && value && value.length < field.minLength) message = `Please write at least ${field.minLength} characters.`;
+      if (field.required && !value) message = t.required[field.name] || t.requiredField;
+      else if (field.type === 'email' && value && !EMAIL_RE.test(value)) message = t.invalidEmail;
+      else if (field.minLength > 0 && value && value.length < field.minLength) message = t.minLength(field.minLength);
       setError(field, message);
       return !message;
     };
@@ -539,13 +578,13 @@
     const setLoading = (loading) => {
       submit.classList.toggle('is-loading', loading);
       submit.disabled = loading;
-      $('.btn__label', submit).textContent = loading ? 'Sending…' : 'Send message';
+      $('.btn__label', submit).textContent = loading ? t.sending : t.send;
     };
 
     const showSuccess = () => {
       form.reset();
       setStatus('');
-      if (!success) { setStatus('Thank you! Your message has been sent.', 'success'); return; }
+      if (!success) { setStatus(t.sent, 'success'); return; }
       form.hidden = true;
       success.hidden = false;
       success.focus();
@@ -560,16 +599,16 @@
     const mailtoFallback = (payload) => {
       const link = document.createElement('a');
       const body = [
-        `Name: ${payload.name}`,
-        `Email: ${payload.email}`,
-        payload.company ? `Company: ${payload.company}` : '',
-        `Services: ${payload.services}`,
-        payload.budget ? `Budget: ${payload.budget}` : '',
+        `${t.fields.name}: ${payload.name}`,
+        `${t.fields.email}: ${payload.email}`,
+        payload.company ? `${t.fields.company}: ${payload.company}` : '',
+        `${t.fields.services}: ${payload.services}`,
+        payload.budget ? `${t.fields.budget}: ${payload.budget}` : '',
         '',
         payload.message,
       ].filter((line, i) => line !== '' || i === 5).join('\n');
-      link.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent('Project enquiry')}&body=${encodeURIComponent(body)}`;
-      link.textContent = `email us directly at ${form.dataset.email}`;
+      link.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(t.mailSubject)}&body=${encodeURIComponent(body)}`;
+      link.textContent = t.emailDirectly(form.dataset.email);
       return link;
     };
 
@@ -580,7 +619,7 @@
       const results = required.map(validate);
       const firstInvalid = required[results.indexOf(false)];
       if (firstInvalid) {
-        setStatus('Please check the highlighted fields.', 'error');
+        setStatus(t.checkFields, 'error');
         firstInvalid.focus();
         return;
       }
@@ -593,7 +632,7 @@
       data.forEach((value, key) => {
         if (key !== 'services') payload[key] = typeof value === 'string' ? value.trim() : value;
       });
-      payload.services = data.getAll('services').join(', ') || 'Not specified';
+      payload.services = data.getAll('services').join(', ') || t.notSpecified;
 
       setStatus('');
       setLoading(true);
@@ -614,7 +653,7 @@
         showSuccess();
       } catch (error) {
         console.warn('[FUMI] Contact form could not be sent:', error);
-        setStatus(['Sorry, your message couldn’t be sent right now. Please try again or ', mailtoFallback(payload), '.'], 'error');
+        setStatus([t.failed, mailtoFallback(payload), '.'], 'error');
       } finally {
         clearTimeout(timeout);
         setLoading(false);
@@ -650,7 +689,7 @@
           area.remove();
         }
         button.classList.add('is-copied');
-        button.setAttribute('aria-label', 'Email address copied');
+        button.setAttribute('aria-label', t.copied);
         clearTimeout(timer);
         timer = setTimeout(() => {
           button.classList.remove('is-copied');
@@ -661,7 +700,35 @@
   }
 
   /* ------------------------------------------------------------------------
-     16. Misc
+     16. Floating WhatsApp button (phones & tablets) — appears after the hero
+         and steps aside while the contact section, with its own button, is on screen
+     ------------------------------------------------------------------------ */
+  function initWhatsAppFloat() {
+    const button = $('.wa-float');
+    if (!button) return;
+
+    const contact = $('#contact');
+    let contactInView = false;
+
+    const update = () => {
+      const show = window.scrollY > window.innerHeight * 0.6 && !contactInView;
+      button.classList.toggle('is-visible', show);
+      button.tabIndex = show ? 0 : -1;
+    };
+
+    if (contact && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        contactInView = entry.isIntersecting;
+        update();
+      }).observe(contact);
+    }
+
+    window.addEventListener('scroll', rafThrottle(update), { passive: true });
+    update();
+  }
+
+  /* ------------------------------------------------------------------------
+     17. Misc
      ------------------------------------------------------------------------ */
   function initYear() {
     $$('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
@@ -673,7 +740,7 @@
   const modules = [
     initLoader, initPageTransitions, initHeader, initMenu, initAnchors, initScrollSpy,
     initReveal, initHero, initSpotlight, initMagnetic, initWorkFilter, initProjectModal,
-    initProcess, initCounters, initContactForm, initCopy, initYear,
+    initCounters, initLocalPrices, initContactForm, initCopy, initWhatsAppFloat, initYear,
   ];
 
   const boot = () => modules.forEach((init) => {

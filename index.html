@@ -8,12 +8,16 @@
   <meta name="theme-color" content="#F8F3EB">
   <meta name="color-scheme" content="light">
   <meta name="robots" content="index, follow">
-  <!-- Replace https://www.fumi.agency/ with your real domain (also in robots.txt and sitemap.xml) -->
   <link rel="canonical" href="https://www.fumi.agency/">
+  <link rel="alternate" hreflang="en" href="https://www.fumi.agency/">
+  <link rel="alternate" hreflang="sq" href="https://www.fumi.agency/sq/">
+  <link rel="alternate" hreflang="x-default" href="https://www.fumi.agency/">
 
   <!-- Open Graph / social sharing -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="FUMI">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="sq_AL">
   <meta property="og:title" content="FUMI — Digital Marketing &amp; Web Development Agency">
   <meta property="og:description" content="Websites, branding, social media and digital advertising for brands that refuse to blend in. Your Vision. Our Digital Touch.">
   <meta property="og:url" content="https://www.fumi.agency/">
@@ -54,6 +58,14 @@
     "email": "FuMi.Agency17@gmail.com",
     "telephone": "+355675731321",
     "sameAs": ["https://www.instagram.com/fumi.agency/"],
+    "address": { "@type": "PostalAddress", "addressCountry": "AL" },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "telephone": "+355675731321",
+      "email": "FuMi.Agency17@gmail.com",
+      "availableLanguage": ["English", "Albanian"]
+    },
     "areaServed": "Worldwide",
     "knowsAbout": ["Social Media Management", "Website Development", "Branding", "Graphic Design", "Digital Advertising", "Creative Strategy"]
   }
@@ -81,7 +93,7 @@
   <!-- Intro loader / page transition curtain -->
   <div class="loader" aria-hidden="true">
     <div class="loader__brand">
-      <span class="loader__word"><img class="loader__logo" src="assets/logo-fumi.png" alt="" width="1903" height="480"></span>
+      <span class="loader__word"><img class="loader__logo" src="assets/logo-fumi.png" srcset="assets/logo-fumi-480.webp 480w, assets/logo-fumi-960.webp 960w, assets/logo-fumi.webp 1903w" sizes="(min-width: 1160px) 415px, 36vw" alt="" width="1903" height="480"></span>
     </div>
     <div class="loader__bar"><span></span></div>
   </div>
@@ -92,7 +104,7 @@
   <header class="header" id="header">
     <div class="container header__inner">
       <a class="logo" href="#home" aria-label="FUMI — back to top">
-        <img class="logo__img" src="assets/logo-fumi.png" alt="FUMI" width="1903" height="480">
+        <img class="logo__img" src="assets/logo-fumi.png" srcset="assets/logo-fumi-480.webp 480w, assets/logo-fumi-960.webp 960w, assets/logo-fumi.webp 1903w" sizes="125px" alt="FUMI" width="1903" height="480">
       </a>
 
       <nav class="nav" aria-label="Primary">
@@ -106,6 +118,7 @@
       </nav>
 
       <div class="header__actions">
+        <a class="lang-switch" href="sq/" hreflang="sq" lang="sq" aria-label="Shqip — lexoni faqen në shqip">SQ</a>
         <a class="btn btn--primary btn--sm btn--icon header__cta" href="#contact" data-magnetic>
           <span class="btn__label">Let’s Talk</span>
           <span class="btn__icon" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg><svg class="icon"><use href="#i-arrow"/></svg></span>
@@ -154,7 +167,7 @@
         <h1 class="hero__brand">
           <span class="sr-only">FUMI — Digital Marketing and Web Development Agency</span>
           <span class="hero__word" aria-hidden="true">
-            <span class="char-wrap"><img class="hero__logo" src="assets/logo-fumi.png" alt="" width="1903" height="480"></span>
+            <span class="char-wrap"><img class="hero__logo" src="assets/logo-fumi.png" srcset="assets/logo-fumi-480.webp 480w, assets/logo-fumi-960.webp 960w, assets/logo-fumi.webp 1903w" sizes="(min-width: 1320px) 1320px, 100vw" alt="" width="1903" height="480"></span>
           </span>
         </h1>
 
@@ -320,6 +333,7 @@
               <p class="plan__desc">For businesses looking to establish their online presence.</p>
             </div>
             <p class="plan__price"><span class="plan__currency">€</span>150<span class="plan__per">/ month</span></p>
+            <p class="plan__all" data-eur="150"></p>
             <a class="btn btn--ghost btn--icon plan__cta" href="#contact" data-service="Social Media Management" data-package="Starter package (€150/month)">
               <span class="btn__label">Get Started</span>
               <span class="btn__icon" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg><svg class="icon"><use href="#i-arrow"/></svg></span>
@@ -341,6 +355,7 @@
               <p class="plan__desc">For businesses looking to increase their visibility, engagement and attract more customers.</p>
             </div>
             <p class="plan__price"><span class="plan__currency">€</span>250<span class="plan__per">/ month</span></p>
+            <p class="plan__all" data-eur="250"></p>
             <a class="btn btn--icon plan__cta" href="#contact" data-service="Social Media Management" data-package="Growth package (€250/month)">
               <span class="btn__label">Get Started</span>
               <span class="btn__icon" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg><svg class="icon"><use href="#i-arrow"/></svg></span>
@@ -363,6 +378,7 @@
               <p class="plan__desc">For businesses looking for a complete digital marketing solution.</p>
             </div>
             <p class="plan__price"><span class="plan__currency">€</span>399<span class="plan__per">/ month</span></p>
+            <p class="plan__all" data-eur="399"></p>
             <a class="btn btn--ghost btn--icon plan__cta" href="#contact" data-service="Social Media Management" data-package="Premium package (€399/month)">
               <span class="btn__label">Get Started</span>
               <span class="btn__icon" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg><svg class="icon"><use href="#i-arrow"/></svg></span>
@@ -393,16 +409,56 @@
             </a>
           </div>
           <ul class="extras__list" data-reveal-group>
-            <li data-reveal><a class="extra" href="#contact" data-service="Social Media Management" data-package="Social Media Management (€150/month)"><span class="extra__name">Social Media Management</span><span class="extra__price">€150<small>/month</small></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-            <li data-reveal><a class="extra" href="#contact" data-service="Social Media Management" data-package="Posts &amp; Reels Package (€250)"><span class="extra__name">Posts &amp; Reels Package</span><span class="extra__price">€250</span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-            <li data-reveal><a class="extra" href="#contact" data-service="Digital Advertising" data-package="Meta / Google Ads Management (€100)"><span class="extra__name">Meta / Google Ads Management</span><span class="extra__price">€100</span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-            <li data-reveal><a class="extra" href="#contact" data-service="Branding &amp; Graphic Design" data-package="Logo Design (€100)"><span class="extra__name">Logo Design</span><span class="extra__price">€100</span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-            <li data-reveal><a class="extra" href="#contact" data-service="Branding &amp; Graphic Design" data-package="Complete Branding (€600)"><span class="extra__name">Complete Branding</span><span class="extra__price">€600</span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-            <li data-reveal><a class="extra" href="#contact" data-service="Website Development" data-package="Business Website (€200)"><span class="extra__name">Business Website</span><span class="extra__price">€200</span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-            <li data-reveal><a class="extra" href="#contact" data-service="Website Development" data-package="Premium Business Website (€1,200)"><span class="extra__name">Premium Business Website</span><span class="extra__price">€1,200</span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-            <li data-reveal><a class="extra" href="#contact" data-service="Website Development" data-package="Website Maintenance (€100/month)"><span class="extra__name">Website Maintenance</span><span class="extra__price">€100<small>/month</small></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-            <li data-reveal><a class="extra" href="#contact" data-service="Creative Strategy" data-package="Marketing Strategy (€250/month)"><span class="extra__name">Marketing Strategy</span><span class="extra__price">€250<small>/month</small></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li data-reveal><a class="extra" href="#contact" data-service="Social Media Management" data-package="Social Media Management (€150/month)"><span class="extra__name">Social Media Management</span><span class="extra__price">€150<small>/month</small><span class="extra__all" data-eur="150"></span></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li data-reveal><a class="extra" href="#contact" data-service="Social Media Management" data-package="Posts &amp; Reels Package (€250)"><span class="extra__name">Posts &amp; Reels Package</span><span class="extra__price">€250<span class="extra__all" data-eur="250"></span></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li data-reveal><a class="extra" href="#contact" data-service="Digital Advertising" data-package="Meta / Google Ads Management (€100)"><span class="extra__name">Meta / Google Ads Management</span><span class="extra__price">€100<span class="extra__all" data-eur="100"></span></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li data-reveal><a class="extra" href="#contact" data-service="Branding &amp; Graphic Design" data-package="Logo Design (€100)"><span class="extra__name">Logo Design</span><span class="extra__price">€100<span class="extra__all" data-eur="100"></span></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li data-reveal><a class="extra" href="#contact" data-service="Branding &amp; Graphic Design" data-package="Complete Branding (€600)"><span class="extra__name">Complete Branding</span><span class="extra__price">€600<span class="extra__all" data-eur="600"></span></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li data-reveal><a class="extra" href="#contact" data-service="Website Development" data-package="Business Website (€200)"><span class="extra__name">Business Website</span><span class="extra__price">€200<span class="extra__all" data-eur="200"></span></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li data-reveal><a class="extra" href="#contact" data-service="Website Development" data-package="Premium Business Website (€1,200)"><span class="extra__name">Premium Business Website</span><span class="extra__price">€1,200<span class="extra__all" data-eur="1200"></span></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li data-reveal><a class="extra" href="#contact" data-service="Website Development" data-package="Website Maintenance (€100/month)"><span class="extra__name">Website Maintenance</span><span class="extra__price">€100<small>/month</small><span class="extra__all" data-eur="100"></span></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+            <li data-reveal><a class="extra" href="#contact" data-service="Creative Strategy" data-package="Marketing Strategy (€250/month)"><span class="extra__name">Marketing Strategy</span><span class="extra__price">€250<small>/month</small><span class="extra__all" data-eur="250"></span></span><svg class="icon extra__arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
           </ul>
+        </div>
+
+        <div class="faq" id="faq">
+          <div class="faq__head" data-reveal>
+            <p class="pricing__label">FAQ</p>
+            <h3 class="extras__title">Questions, <em>answered</em></h3>
+            <p class="extras__intro">Can’t find what you’re looking for? Send us a message and we’ll reply within 24 hours.</p>
+          </div>
+          <div class="faq__list" data-reveal-group>
+            <details class="faq__item" data-reveal>
+              <summary>Can I choose just one service instead of a package?</summary>
+              <p class="faq__answer">Yes. Every service is also available on its own — see Individual Services above — or ask us for a custom quote that combines exactly what you need.</p>
+            </details>
+            <details class="faq__item" data-reveal>
+              <summary>Can I switch to a different plan later?</summary>
+              <p class="faq__answer">Yes. Start with the plan that fits your business today and move up as you grow — just let us know.</p>
+            </details>
+            <details class="faq__item" data-reveal>
+              <summary>Do you use templates?</summary>
+              <p class="faq__answer">No. Every website, identity and campaign is designed from scratch for your brand, your audience and your goals.</p>
+            </details>
+            <details class="faq__item" data-reveal>
+              <summary>Do you work with businesses outside Albania?</summary>
+              <p class="faq__answer">Yes. We work with local businesses and international brands alike, in English or Albanian.</p>
+            </details>
+            <details class="faq__item" data-reveal>
+              <summary>How quickly will you reply?</summary>
+              <p class="faq__answer">Within 24 hours. Message us through the form, by email or on WhatsApp and we’ll come back with ideas and clear next steps.</p>
+            </details>
+            <details class="faq__item" data-reveal>
+              <summary>Why are prices shown in euros and lekë?</summary>
+              <p class="faq__answer">Our prices are set in euros. The amounts in lekë are approximate, based on a recent exchange rate, to give you a quick idea of the cost.</p>
+            </details>
+            <!-- More questions worth answering once you've decided the details:
+                 · Is there a minimum contract length?
+                 · How and when do I pay?
+                 · Is the advertising budget included in the price?
+                 · How many rounds of revisions are included?
+                 Copy a <details class="faq__item" data-reveal> block above to add one. -->
+          </div>
         </div>
       </div>
     </section>
@@ -670,9 +726,30 @@
           </ol>
         </div>
 
+        <!-- TESTIMONIALS — hidden until you have real client quotes.
+             Replace the [placeholders] below, then delete the word "hidden" from the next line to show the section.
+             Do the same in sq/index.html. -->
+        <div class="testimonials" id="testimonials" hidden>
+          <h3 class="approach__title" data-reveal>What our clients say</h3>
+          <div class="testimonials__list" data-reveal-group>
+            <figure class="quote" data-reveal>
+              <blockquote><p>[Client quote — one or two sentences about working with FUMI and the result they got.]</p></blockquote>
+              <figcaption><span class="quote__name">[Client name]</span><span class="quote__role">[Role, Business name]</span></figcaption>
+            </figure>
+            <figure class="quote" data-reveal>
+              <blockquote><p>[Client quote]</p></blockquote>
+              <figcaption><span class="quote__name">[Client name]</span><span class="quote__role">[Role, Business name]</span></figcaption>
+            </figure>
+            <figure class="quote" data-reveal>
+              <blockquote><p>[Client quote]</p></blockquote>
+              <figcaption><span class="quote__name">[Client name]</span><span class="quote__role">[Role, Business name]</span></figcaption>
+            </figure>
+          </div>
+        </div>
+
         <ul class="stats" data-reveal-group>
           <li class="stat" data-reveal><span class="stat__value"><span data-count="5" data-pad="2">05</span></span><span class="stat__label">Core services under one roof</span></li>
-          <li class="stat" data-reveal><span class="stat__value"><span data-count="4" data-pad="2">04</span></span><span class="stat__label">Clear steps from idea to launch</span></li>
+          <li class="stat" data-reveal><span class="stat__value"><span data-count="2" data-pad="2">02</span></span><span class="stat__label">Languages: English &amp; Albanian</span></li>
           <li class="stat" data-reveal><span class="stat__value"><span data-count="24">24</span><span class="stat__suffix">h</span></span><span class="stat__label">Reply time for every enquiry</span></li>
           <li class="stat" data-reveal><span class="stat__value"><span data-count="100">100</span><span class="stat__suffix">%</span></span><span class="stat__label">Custom work — no templates, ever</span></li>
         </ul>
@@ -815,7 +892,7 @@
 
       <div class="footer__grid">
         <div class="footer__brand">
-          <a class="logo" href="#home" aria-label="FUMI — back to top"><img class="logo__img" src="assets/logo-fumi.png" alt="FUMI" width="1903" height="480"></a>
+          <a class="logo" href="#home" aria-label="FUMI — back to top"><img class="logo__img" src="assets/logo-fumi.png" srcset="assets/logo-fumi-480.webp 480w, assets/logo-fumi-960.webp 960w, assets/logo-fumi.webp 1903w" sizes="125px" alt="FUMI" width="1903" height="480"></a>
           <p>Your Vision. Our Digital Touch.</p>
         </div>
         <nav aria-label="Footer">
@@ -849,7 +926,7 @@
         </div>
       </div>
 
-      <div class="footer__wordmark" aria-hidden="true"><img src="assets/logo-fumi.png" alt="" width="1903" height="480" loading="lazy"></div>
+      <div class="footer__wordmark" aria-hidden="true"><img src="assets/logo-fumi.png" srcset="assets/logo-fumi-480.webp 480w, assets/logo-fumi-960.webp 960w, assets/logo-fumi.webp 1903w" sizes="(min-width: 1320px) 1320px, 100vw" alt="" width="1903" height="480" loading="lazy"></div>
 
       <div class="footer__bottom">
         <p>© <span data-year>2026</span> FUMI. All rights reserved.</p>
@@ -875,5 +952,10 @@
       </div>
     </div>
   </dialog>
+
+  <!-- Floating WhatsApp button (phones & tablets) -->
+  <a class="wa-float" href="https://wa.me/355675731321?text=Hi%20FUMI!%20I%27d%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener" tabindex="-1" aria-label="Chat with FUMI on WhatsApp">
+    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+  </a>
 </body>
 </html>

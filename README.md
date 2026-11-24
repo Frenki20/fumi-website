@@ -7,11 +7,13 @@ Hand-coded, dependency-free website for **FUMI**, a digital marketing & web deve
 
 ```
 Fumi/
-├── index.html          One-page site: Home, Services, Work, About, Process, Contact
+├── index.html          English one-page site: Home, Services, Pricing (+ FAQ), Work, About, Contact
+├── sq/index.html       Albanian version of the same page
 ├── 404.html            Branded "page not found" page
 ├── css/style.css       Design tokens, layout, components, animations, responsive rules
-├── js/main.js          Loader, navigation, scroll effects, portfolio, pop-up, contact form
-├── assets/             favicon.svg, apple-touch-icon.png, logo.png, og-image.png
+├── js/main.js          Loader, navigation, scroll effects, portfolio, pop-up, contact form, lekë prices,
+│                       floating WhatsApp button, and the interface text for both languages
+├── assets/             favicon, logos (PNG + WebP in 480/960/1903 px widths), og-image.png
 ├── robots.txt
 └── sitemap.xml
 ```
@@ -20,18 +22,21 @@ Fumi/
 
 The palette is cream ("pana") `#F3EADB`, warm black `#1A1414` and bright red `#E5383B`. Every colour is set once, as a variable at the top of `css/style.css` (`:root`), so it can be changed in one place.
 
-## Before going live — replace these placeholders
+## Two languages
 
-Use your editor's **Find & Replace across all files**:
+The site exists twice: `index.html` (English) and `sq/index.html` (Albanian). Both have the same structure, so **any change to text, prices or contact details must be made in both files.** The `EN`/`SQ` button in the header links between them, and `hreflang` tags tell Google which page is which.
 
-| Placeholder | Replace with | Where |
-|---|---|---|
-| `hello@fumi.agency` | Your real email | index.html (links, form, structured data) |
-| `000000000000` | WhatsApp number, international format, digits only (e.g. `355691234567`) | index.html |
-| `fumi.agency/` (Instagram URLs) and `@fumi.agency` | Your Instagram handle | index.html |
-| `https://www.fumi.agency/` | Your real domain | index.html, robots.txt, sitemap.xml |
+Text created by JavaScript (form errors, "Sending…", etc.) lives in the `STRINGS` object at the top of `js/main.js`, in both languages.
 
-The **Our Work** section contains six sample projects. Replace them with real case studies: each `<article class="project">` has a title, description, category (`web`, `branding` or `social`) and a hidden `.project__details` block shown in the pop-up.
+## Prices in lekë
+
+Under each euro price, the site shows an approximate amount in lekë (e.g. `≈ 14,500 ALL`). It's calculated in `js/main.js` from `EUR_TO_ALL` (currently `97`) and rounded to the nearest 500. Update that one number when the exchange rate moves. Each price has a `data-eur="…"` placeholder next to it; keep it in sync if you change a price.
+
+## Still to do
+
+- **Our Work**: the six projects are samples. Replace them with real case studies (in both languages). Each `<article class="project">` has a title, description, category (`web`, `branding` or `social`) and a hidden `.project__details` block shown in the pop-up.
+- **Testimonials**: a ready-made section sits in About, hidden. Paste in real quotes and remove the `hidden` attribute (instructions in the HTML comment, both files).
+- **FAQ**: an HTML comment under the FAQ lists questions worth adding once you've decided the answers (contract length, payment, ad budget, revisions).
 
 ## Contact form
 
