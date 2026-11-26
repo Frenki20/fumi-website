@@ -106,7 +106,7 @@
       sessionStorage.setItem('fumi:intro', '1');
     } catch (_) { /* storage blocked — show the full intro */ }
 
-    const minDuration = reducedMotion() ? 0 : seenIntro ? 350 : 1300;
+    const minDuration = reducedMotion() ? 0 : seenIntro ? 350 : 800;
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
 

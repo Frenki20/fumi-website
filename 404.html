@@ -12,9 +12,10 @@
     document.documentElement.className = 'js';
     setTimeout(function () { if (!window.__fumi) document.documentElement.className = 'no-js'; }, 4000);
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;800&display=swap">
+  <!-- Fonts are self-hosted in assets/fonts (no request to Google) -->
+  <link rel="preload" href="/assets/fonts/syne-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
   <!-- Root-relative paths so this page works at any URL depth on your host -->
   <link rel="stylesheet" href="/css/style.css">
   <script src="/js/main.js" defer></script>

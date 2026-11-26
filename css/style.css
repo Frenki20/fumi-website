@@ -2530,6 +2530,23 @@ a.contact__value:hover { color: var(--accent-ink); background-size: 100% 1px; }
 .error-page__text { max-width: 30rem; margin: 0 auto 2.25rem; color: var(--muted); }
 .error-page .hero__dot { transform: none; }
 
+/* 20b. Legal pages (privacy policy)
+   ========================================================================== */
+.header--simple .header__actions { grid-column: 3; }
+.legal { padding: calc(var(--header-h) + clamp(3rem, 8vh, 5rem)) 0 clamp(4rem, 10vh, 6rem); }
+.legal__inner { width: min(100% - var(--gutter) * 2, 46rem); margin-inline: auto; }
+.legal h1 { font: 600 clamp(2.2rem, 1.4rem + 3vw, 3.6rem)/1.05 var(--font-display); letter-spacing: -.02em; margin: 0 0 .75rem; }
+.legal h2 { font: 600 1.25rem/1.3 var(--font-display); margin: 2.5rem 0 .75rem; }
+.legal p,
+.legal li { color: var(--muted); line-height: 1.7; }
+.legal p + p,
+.legal ul + p { margin-top: .9rem; }
+.legal ul { margin: .5rem 0 0; padding-left: 1.2rem; list-style: disc; }
+.legal li + li { margin-top: .45rem; }
+.legal a:not(.btn) { color: var(--accent-ink); text-underline-offset: .2em; }
+.legal__updated { margin-bottom: 2.5rem; font-size: .875rem; }
+.legal__back { margin-top: 3rem; }
+
 /* 21. Responsive
    ========================================================================== */
 @media (max-width: 1100px) {
@@ -2565,6 +2582,9 @@ a.contact__value:hover { color: var(--accent-ink); background-size: 100% 1px; }
 }
 
 @media (max-width: 720px) {
+  /* Let the hero size to its content on phones instead of stretching to the full screen height */
+  .hero { min-height: 0; }
+
   .services__grid { grid-template-columns: minmax(0, 1fr); }
   .service--featured { grid-column: auto; flex-direction: column; }
   .service__visual { min-height: 0; padding: 1rem 0 2rem; order: -1; }
